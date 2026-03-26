@@ -1201,12 +1201,27 @@ a { text-decoration: none; }
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
+    grid-template-rows: auto auto auto;
     gap: 12px;
+    grid-template-areas:
+        "big big top-right"
+        "big big bottom-right"
+        "small-left small-middle small-right";
 }
 
 .gallery-item { border-radius: 12px; overflow: hidden; }
-.gi-large { grid-column: span 2; }
+
+.slot-big { grid-area: big; }
+.slot-top-right { grid-area: top-right; }
+.slot-bottom-right { grid-area: bottom-right; }
+.slot-small-left { grid-area: small-left; }
+.slot-small-middle { grid-area: small-middle; }
+.slot-small-right { grid-area: small-right; }
+
+.slot-big .gallery-placeholder { aspect-ratio: 4/3; }
+.slot-small-left .gallery-placeholder,
+.slot-small-middle .gallery-placeholder,
+.slot-small-right .gallery-placeholder { aspect-ratio: 1/1; }
 
 .gallery-placeholder {
     aspect-ratio: 3/2;
@@ -1731,8 +1746,15 @@ a { text-decoration: none; }
     .mobile-menu-btn { display: block; }
     .trust-grid { grid-template-columns: repeat(2, 1fr); }
     .amenities-grid { grid-template-columns: repeat(3, 1fr); }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
-    .gi-large { grid-column: span 1; }
+    .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas:
+            "big big"
+            "top-right bottom-right"
+            "small-left small-middle"
+            "small-right small-right";
+    }
     .hero-ctas { flex-direction: column; }
     .hero-ctas .cta-btn { min-width: unset; width: 100%; }
     .prop-image-row { grid-template-columns: repeat(3, 1fr); }
@@ -1748,8 +1770,17 @@ a { text-decoration: none; }
 
 @media (max-width: 480px) {
     .amenities-grid { grid-template-columns: repeat(2, 1fr); }
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gi-large { grid-column: span 1; }
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-areas:
+            "big"
+            "top-right"
+            "bottom-right"
+            "small-left"
+            "small-middle"
+            "small-right";
+    }
     .trust-grid { grid-template-columns: repeat(2, 1fr); }
     .topbar { font-size: 0.72rem; }
     .dev-stats { grid-template-columns: repeat(2, 1fr); }
